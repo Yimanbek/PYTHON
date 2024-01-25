@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 from decouple import config
 from datetime import timedelta
+import os
 # from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -142,6 +143,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -206,14 +211,14 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
         'LOCATION': 'redis://127.0.0.1:6379',
-        'OPTIONS':{
-            'CLIENT_CLASS':'django_redis.client.DefaultClient',
-        }
+        # 'OPTIONS':{
+        #     'CLIENT_CLASS':'django_redis.client.DefaultClient',
+        # }
     }
 }
 
 
-REDIS_HOST = '127.0.0.1'
+REDIS_HOST = 'redis'
 REDIS_PORT = '6379'
 
 #Celery setting
@@ -251,7 +256,7 @@ LOGGING = {
         'file': {
             'class': 'logging.FileHandler',
             'formatter': 'main_format',
-            'filename': '/home/yimanbek/Desktop/folder/Book_store/log.log',
+            'filename': 'log.log',
         }
     },
 
